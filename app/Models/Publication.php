@@ -11,6 +11,11 @@ class Publication extends Model {
         'content',
         'author'
     ];
+
+    protected $dates = [
+        'created_at'
+    ];
+
     protected function excerpt(): Attribute {
         return Attribute::make(
             get: fn () => strlen($this->content) > 60 ? substr($this->content, 0, 60) . '...' : $this->content,

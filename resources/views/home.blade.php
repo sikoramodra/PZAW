@@ -10,4 +10,6 @@
         <h2 class="font-bold text-3xl ">{{ $publication->title }}</h2>
         <p class="text-xl dark:text-dark-500">{{ $publication->content }}</p>
     </div>
+
+    <p class="text-lg text-right mr-32">{{ $publication->created_at->diffForHumans() }}</p>
 @endsection

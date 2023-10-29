@@ -1,33 +1,15 @@
 <?php
 
+use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\SiteController;
 use App\Models\Publication;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-    return view('home', [
-        'publication' => Publication::orderBy('created_at', 'desc')->first(),
-    ]);
-})->name('home');
+Route::get('/', [SiteController::class, 'home'])->name('home');
+Route::get('/about-us', [SiteController::class, 'about'])->name('about_us');
 
-Route::get('/about-us', function(){
-    return view('about_us');
-})->name('about_us');
-
-
-$publications = Publication::orderBy('created_at', 'desc')->get();
-
-
-Route::get('/publications', function() use($publications){
-    return view('index', [
-        'publications' => $publications
-    ]);
-})->name('publications');
-
-Route::get('/publications/{id}', function($id) use ($publications) {
-   return view('show', [
-       'publication' => $publications[$id]
-   ]);
-})->name('publication');
+Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
+Route::get('/publications/{publication}', [PublicationController::class, 'show'])->name('publications.show')->whereNumber('publication');
 
 
 $quotes = [

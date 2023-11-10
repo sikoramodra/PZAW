@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SiteController;
 use App\Models\Publication;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,7 @@ Route::get('/about-us', [SiteController::class, 'about'])->name('about_us');
 Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
 Route::get('/publications/{publication}', [PublicationController::class, 'show'])->name('publications.show')->whereNumber('publication');
 
+Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
 
 $quotes = [
     1 => [

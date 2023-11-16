@@ -11,6 +11,8 @@ Route::get('/about-us', [SiteController::class, 'about'])->name('about_us');
 
 Route::get('/publications', [PublicationController::class, 'index'])->name('publications.index');
 Route::get('/publications/{publication}', [PublicationController::class, 'show'])->name('publications.show')->whereNumber('publication');
+Route::get('/publications/add', [PublicationController::class, 'create'])->name('publications.form');
+Route::post('/publications/add', [PublicationController::class, 'store'])->name('publication.add');
 
 Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
 

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePublicationRequest;
 use App\Models\Publication;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class PublicationController extends Controller {
     public function index() {
@@ -19,5 +22,22 @@ class PublicationController extends Controller {
             'publication' => $publication,
             'comments' => $publication->comments
         ]);
+    }
+
+    public function create() {
+        $users = User::all();
+
+        return view('publications.form', [
+            'authors' => $users
+        ]);
+    }
+
+    public function store(StorePublicationRequest $request) {
+        $data = $request->validate();
+
+        $newP = new Publication($data);
+        $newP->save();
+
+        return redirect()->route('publications.show', $newP);
     }
 }

@@ -33,7 +33,7 @@ class PublicationController extends Controller {
     }
 
     public function store(StorePublicationRequest $request) {
-        $data = $request->validate();
+        $data = $request->validated();
 
         $newP = new Publication($data);
         $newP->save();

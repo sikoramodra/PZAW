@@ -14,7 +14,7 @@
         <div>
             @foreach ($user->publications as $publication)
                 <li>
-                    <a href="{{ route('publications.show', ['publication' => $publication]) }}">
+                    <a href="{{ route('publication.show', ['publication' => $publication]) }}">
                         {{ $publication->title }}
                     </a>
                 </li>

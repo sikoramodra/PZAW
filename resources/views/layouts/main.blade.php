@@ -12,10 +12,10 @@
         <nav class="h-12 w-full text-dark-100 dark:text-white p-2 flex items-center justify-between border-solid border-dark-100 dark:border-white bg-white/75 dark:bg-dark-100/75 px-2 py-4 shadow backdrop-blur-md fixed top-0">
             <h3 class="font-nova text-4xl uppercase underline">pzaw</h3>
             <div class="flex gap-3">
-                <x-nav route="home" icon="home" name="home"></x-nav>
-                <x-nav route="about_us" icon="info" name="about us"></x-nav>
-                <x-nav route="publications.index" icon="user" name="publications"></x-nav>
-                <x-nav route="quotes" icon="message-square" name="quotes"></x-nav>
+                <x-nav route="site.home" icon="home" name="home"></x-nav>
+                <x-nav route="site.about_us" icon="info" name="about us"></x-nav>
+                <x-nav route="publication.index" icon="user" name="publications"></x-nav>
+                <x-nav route="publication.form" icon="message-square" name="write"></x-nav>
             </div>
             <h3 class="animate-pulse cursor-pointer text-2xl">login</h3>
         </nav>

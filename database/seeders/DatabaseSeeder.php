@@ -2,23 +2,19 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Comment;
 use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
-{
+class DatabaseSeeder extends Seeder {
     /**
      * Seed the application's database.
      *
      * @return void
      */
-    public function run()
-    {
-        \App\Models\User::factory(10)->create();
-
+    public function run() {
+        User::factory(10)->create();
 
         $testUser = User::factory()->create([
             'name' => 'Test User',
@@ -38,7 +34,7 @@ class DatabaseSeeder extends Seeder
             'author_id' => $testUser->id,
         ]);
 
-        $p3 = Publication::create([
+        Publication::create([
             'title' => 'Data Backup and Recovery in GNU/Linux',
             'content' => 'Protect your data with effective backup and recovery strategies in GNU/Linux. This guide provides step-by-step instructions for setting up automated backups, both locally and in the cloud. It covers tools like rsync, tar, and cloud storage services for secure data storage. Additionally, it offers insights into disaster recovery planning. By following the practices outlined in this publication, you can ensure the safety and availability of your critical data in GNU/Linux.',
             'author_id' => $testUser->id,

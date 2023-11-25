@@ -4,26 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('comments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('author_id')
-                ->references('id')
-                ->on('users');
-            $table->foreignId('publication_id')
-                ->references('id')
-                ->on('publications');
-            $table->text('content');
-            $table->timestamps();
-        });
+    public function up() {
+        Schema::create(
+            'comment', function (Blueprint $table) {
+                $table->id();
+                $table->foreignId('author_id')
+                      ->references('id')->on('user');
+                $table->foreignId('publication_id')
+                      ->references('id')->on('publication');
+                $table->text('content');
+                $table->timestamps();
+            }
+        );
     }
 
     /**
@@ -31,8 +29,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('comments');
+    public function down() {
+        Schema::dropIfExists('comment');
     }
 };

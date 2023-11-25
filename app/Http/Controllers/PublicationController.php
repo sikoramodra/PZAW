@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePublicationRequest;
+use App\Http\Requests\UpdatePublicationRequest;
 use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,6 +39,24 @@ class PublicationController extends Controller {
         $newP = new Publication($data);
         $newP->save();
 
-        return redirect()->route('publications.show', $newP);
+        return redirect()->route('publications.show', $newP)->with('success', 'Success');
     }
+
+    public function edit(Publication $publication) {
+        $users = User::all();
+
+        return view('publications.form', [
+            'publication' => $publication,
+            'authors' => $users
+        ]);
+    }
+
+    public function update(UpdatePublicationRequest $request, Publication $publication) {
+        $data = $request->validated();
+        $publication->fill($data);
+        $publication->save();
+
+        return redirect()->route('publications.show', ['publication' => $publication])->with('success', 'Success');
+    }
+
 }

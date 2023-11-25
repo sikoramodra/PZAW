@@ -13,6 +13,8 @@ Route::get('/publications', [PublicationController::class, 'index'])->name('publ
 Route::get('/publications/{publication}', [PublicationController::class, 'show'])->name('publications.show')->whereNumber('publication');
 Route::get('/publications/add', [PublicationController::class, 'create'])->name('publications.form');
 Route::post('/publications/add', [PublicationController::class, 'store'])->name('publication.add');
+Route::get('publications/{publication}/edit', [PublicationController::class, 'edit'])->name('publication.edit');
+Route::put('publications/{publication}', [PublicationController::class, 'update'])->name('publication.update');
 
 Route::get('users/{id}', [UserController::class, 'show'])->name('users.show');
 

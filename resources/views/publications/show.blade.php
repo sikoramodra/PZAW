@@ -4,13 +4,16 @@
 
 @section('content')
     <h1 class="heading">publications</h1>
+    <x-alerts></x-alerts>
 
     <div class="px-32 py-8 flex flex-col gap-4">
         <h3 class="font-bold text-lg ml-4">{{ $publication->author->name }}</h3>
         <h2 class="font-bold text-3xl ">{{ $publication->title }}</h2>
         <p class="text-xl dark:text-dark-500">{{ $publication->content }}</p>
 
-        <div class="mt-32">
+        <a class="my-12 w-20 text-white bg-blue-500 hover:bg-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-400" href="{{ route('publication.edit', ['publication' => $publication->id]) }}">Edit</a>
+
+        <div>
             @foreach ($comments as $comment)
                 <div class="p-4 my-4 bg-white border border-dark-500 rounded-lg shadow dark:bg-dark-100 dark:border-dark-200 ">
                     <div class="flex mb-4">
@@ -21,6 +24,7 @@
                         </div>
                         <i data-feather="more-horizontal" class="cursor-pointer ml-auto"></i>
                     </div>
+
                     <p class="text-md dark:text-dark-500">
                         {{ $comment->content }}
                     </p>

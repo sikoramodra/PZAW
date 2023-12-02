@@ -25,3 +25,6 @@ Route::get('publications/{publication}/edit', [PublicationController::class, 'ed
     ->name('publication.edit');
 Route::put('publications/{publication}', [PublicationController::class, 'update'])
     ->name('publication.update');
+
+Route::delete('publications/{publication}', [PublicationController::class, 'destroy'])
+    ->name('publication.destroy');

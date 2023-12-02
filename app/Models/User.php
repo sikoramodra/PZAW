@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     protected $table = 'user';
 
@@ -41,6 +42,8 @@ class User extends Authenticatable {
     ];
 
     public function publications(): HasMany {
-        return $this->hasMany(Publication::class, 'author_id');
+        return $this->hasMany(
+            Publication::class, 'author_id'
+        )->withTrashed();
     }
 }

@@ -7,11 +7,27 @@
     <x-alerts></x-alerts>
 
     <div class="px-32 py-8 flex flex-col gap-4">
-        <h3 class="font-bold text-lg ml-4">{{ $publication->author->name }}</h3>
+        <h3 class="font-bold text-lg ml-4">
+            @if(isset($publication->author))
+                {{ $publication->author->name }}
+            @else
+                [deleted]
+            @endif
+        </h3>
         <h2 class="font-bold text-3xl ">{{ $publication->title }}</h2>
         <p class="text-xl dark:text-dark-500">{{ $publication->content }}</p>
 
-        <a class="my-12 w-20 text-white bg-blue-500 hover:bg-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-400" href="{{ route('publication.edit', ['publication' => $publication->id]) }}">Edit</a>
+        <div class="my-12 flex gap-4">
+            <a href="{{ route('publication.edit', ['publication' => $publication]) }}">
+                <button type="submit" class="w-20 text-white bg-blue-500 hover:bg-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-400">Edit</button>
+            </a>
+
+            <form action="{{ route('publication.destroy', ['publication' => $publication]) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button class="w-20 text-white bg-blue-500 hover:bg-blue-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-400">Delete</button>
+            </form>
+        </div>
 
         <div>
             @foreach ($comments as $comment)

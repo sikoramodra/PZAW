@@ -49,7 +49,9 @@
         <select id="author" name="author_id" class="border border-dark-400 text-dark-100 text-sm rounded-lg focus:border-blue-100 block w-full p-2.5 dark:bg-dark-200 dark:border-dark-400 dark:placeholder-dark-500 dark:text-white dark:focus:border-blue-100 outline-0">
             <option value="">--Wybierz autora--</option>
             @foreach($authors as $author)
-                <option value="{{ $author->id }}" @selected($author_id == $author->id)>{{ $author->name }}</option>
+                @if(!isset($author->deleted_at))
+                    <option value="{{ $author->id }}" @selected($author_id == $author->id)>{{ $author->name }}</option>
+                @endif
             @endforeach
         </select>
         @error('author_id')

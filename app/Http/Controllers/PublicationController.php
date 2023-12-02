@@ -33,9 +33,9 @@ class PublicationController extends Controller {
         $newP = new Publication($data);
         $newP->save();
 
-        return redirect()->route('publication.show', $newP)->with(
-            'success', 'Success'
-        );
+        return redirect()->route(
+            'publication.show', $newP
+        )->with('success', 'Successfully added');
     }
 
     public function edit(Publication $publication) {
@@ -57,7 +57,15 @@ class PublicationController extends Controller {
 
         return redirect()->route(
             'publication.show', ['publication' => $publication]
-        )->with('success', 'Success');
+        )->with('success', 'Successfully updated');
+    }
+
+    public function destroy(Publication $publication) {
+        $publication->delete();
+
+        return redirect()->route(
+            'publication.index'
+        )->with('success', 'Successfully deleted');
     }
 
 }

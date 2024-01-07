@@ -17,14 +17,22 @@
                 <x-nav route="publication.index" icon="user" name="publications"></x-nav>
                 <x-nav route="publication.form" icon="message-square" name="write"></x-nav>
             </div>
-            <h3 class="animate-pulse cursor-pointer text-2xl">login</h3>
+            @if(auth()->check())
+                <a class="cursor-pointer text-2xl" href="{{ route('auth.logout') }}">
+                    {{ auth()->user()->name }}
+                </a>
+            @else
+                <a class="cursor-pointer text-2xl" href="{{ route('auth.form') }}">
+                    login
+                </a>
+            @endif
         </nav>
         <main class="flex-grow">
             @yield('content')
         </main>
         <footer class="py-4 w-full px-6 flex-shrink-0">
             <p class="text-lg font-bold">Wojciech Modro</p>
-            <p class="text-sm">Copyright © 2023</p>
+            <p class="text-sm">Copyright © 2024</p>
         </footer>
     </body>
     <script defer>feather.replace();</script>

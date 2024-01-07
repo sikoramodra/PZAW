@@ -4,6 +4,7 @@
 
 @section('content')
     <h1 class="heading">Witaj na naszej jak na razie pustej stronie!</h1>
+    <x-alerts></x-alerts>
 
     <div class="px-32 py-8 flex flex-col gap-4">
         <h3 class="font-bold text-lg ml-4">

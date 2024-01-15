@@ -21,6 +21,15 @@
         <p class="text-red-100 text-xs italic">{{ $message }}</p>
         @enderror
 
+        <div class="flex mb-2 mt-8">
+            <input type="checkbox" id="remember_me" name="remember_me" class="border border-dark-400 text-dark-100 text-sm rounded-lg focus:border-blue-100 block p-2.5 dark:bg-dark-200 dark:border-dark-400 dark:placeholder-dark-500 dark:text-white dark:focus:border-blue-100 outline-0">
+            <label for="remember_me" class="text-sm font-medium ml-2">Remember me</label>
+        </div>
+        @error('remember_me')
+        <p class="text-red-100 text-xs italic">{{ $message }}</p>
+        @enderror
+
+
         <button type="submit" class="mt-8 text-white bg-blue-500 hover:bg-blue-400 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-500 dark:hover:bg-blue-400">Submit</button>
     </form>
 

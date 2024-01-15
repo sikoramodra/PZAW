@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller {
@@ -13,21 +14,20 @@ class AuthController extends Controller {
     public function login(LoginRequest $request) {
         $credentials = $request->only('name', 'password');
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route(
-            'site.home'
-            )->with('success', 'Successfully logged in');
-        } else {
-            return redirect()->route(
-            'auth.form'
-            )->with('error', 'Incorrect username or password');
+        if (Auth::attempt($credentials, $request->boolean('remember_me'))) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('/');
         }
+        return back()->withErrors(['name' => 'Incorrect username or password']);
     }
 
-   public function logout() {
+   public function logout(Request $request) {
        Auth::logout();
-       return redirect()->route(
-           'auth.form'
-       )->with('success', 'Successfully logged out');
+
+       $request->session()->invalidate();
+       $request->session()->regenerateToken();
+
+       return redirect('/')->with('success', 'Successfully logged out');
    }
 }

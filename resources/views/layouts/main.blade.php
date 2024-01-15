@@ -17,15 +17,15 @@
                 <x-nav route="publication.index" icon="user" name="publications"></x-nav>
                 <x-nav route="publication.form" icon="message-square" name="write"></x-nav>
             </div>
-            @if(auth()->check())
+            @auth
                 <a class="cursor-pointer text-2xl" href="{{ route('auth.logout') }}">
-                    {{ auth()->user()->name }}
+                    {{ Auth::user()->name }}
                 </a>
             @else
                 <a class="cursor-pointer text-2xl" href="{{ route('auth.form') }}">
                     login
                 </a>
-            @endif
+            @endauth
         </nav>
         <main class="flex-grow">
             @yield('content')

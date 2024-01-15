@@ -13,7 +13,7 @@ class UserController extends Controller {
         return view('user.show', ['user' => $user]);
     }
 
-    public function create() {
+    public function form() {
         return view('user.form');
     }
 

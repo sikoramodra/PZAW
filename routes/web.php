@@ -5,6 +5,7 @@ use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [SiteController::class, 'home'])->name('site.home');
@@ -30,14 +31,23 @@ Route::post('/publications/add', [PublicationController::class, 'add'])
     ->name('publication.add')->middleware('auth');
 
 Route::get('/publications/{publication}/edit', [PublicationController::class, 'edit'])
-    ->name('publication.edit');
+    ->name('publication.edit')->middleware('auth');
 Route::put('/publications/{publication}', [PublicationController::class, 'update'])
-    ->name('publication.update');
+    ->name('publication.update')->middleware('auth');
 
 Route::delete('/publications/{publication}', [PublicationController::class, 'destroy'])
-    ->name('publication.destroy');
+    ->name('publication.destroy')->middleware('auth');
 
 Route::post('/comment/add', [CommentController::class, 'add'])
     ->name('comment.add')->middleware('auth');
 Route::delete('/comment/{comment}', [CommentController::class, 'destroy'])
-    ->name('comment.delete');
+    ->name('comment.delete')->middleware('auth');
+
+
+Route::get('/admin', function () {
+    if (Gate::denies('admin-access')) {
+        abort(403);
+    }
+
+    echo 'Panel administratora';
+})->name('admin-panel');

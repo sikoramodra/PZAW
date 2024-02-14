@@ -19,26 +19,29 @@
             {{ $comment->content }}
         </p>
 
-        <button
-            class="w-20 text-white bg-green-500 hover:bg-green-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-400"
-            onclick="setRespond({{$comment->id}},'{{ $comment->author->name }}')">Respond
-        </button>
-
-        <form action="{{ route('comment.delete', ['comment' => $comment]) }}" method="post">
-            @csrf
-            @method('DELETE')
+        @auth
             <button
-                class="w-20 text-white bg-red-500 hover:bg-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-400">
-                Delete
+                class="w-20 text-white bg-green-500 hover:bg-green-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-500 dark:hover:bg-green-400"
+                onclick="setRespond({{$comment->id}},'{{ $comment->author->name }}')">Respond
             </button>
-        </form>
+
+            @if(auth()->user()->id == $comment->author->id)
+                <form action="{{ route('comment.delete', ['comment' => $comment]) }}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button
+                        class="w-20 text-white bg-red-500 hover:bg-red-400 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-500 dark:hover:bg-red-400">
+                        Delete
+                    </button>
+                </form>
+            @endif
+        @endauth
 
         @foreach ($comments as $response)
             @if(isset($response->parent_id) && $response->parent_id == $comment->id)
                 <x-comment :comment="$response" :comments="$comments"></x-comment>
             @endif
         @endforeach
-
     </div>
 @else
     <div class="p-4 my-4 bg-white border border-dark-500 rounded-lg shadow dark:bg-dark-100 dark:border-dark-200 ">

@@ -40,6 +40,8 @@ class PublicationController extends Controller {
     }
 
     public function edit(Publication $publication) {
+        $this->authorize('update', $publication);
+
         $users = User::all();
 
         return view(
@@ -52,6 +54,8 @@ class PublicationController extends Controller {
         UpdatePublicationRequest $request,
         Publication              $publication
     ) {
+        $this->authorize('update', $publication);
+
         $data = $request->validated();
         $publication->fill($data);
         $publication->save();
@@ -62,6 +66,8 @@ class PublicationController extends Controller {
     }
 
     public function destroy(Publication $publication) {
+        $this->authorize('update', $publication);
+
         $publication->delete();
 
         return redirect()->route(

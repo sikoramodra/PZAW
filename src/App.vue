@@ -1,53 +1,40 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue';
-import TheWelcome from './components/TheWelcome.vue';
+import { reactive, ref } from 'vue';
+
+const name = ref('Wojciech');
+name.value = 'Wojtek';
+
+const user = reactive({
+  name: 'Wojciech',
+  surname: 'Modro',
+});
+user.surname = 'Nowak';
+
+const colors = ['red', 'green', 'blue'];
+const selectedColor = ref();
+
+const updateName = (event) => {
+  name.value = event.target.value;
+};
 </script>
 
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="./assets/logo.svg"
-      width="125"
-      height="125"
-    />
+  <h1>{{ name }}</h1>
+  <input type="text" v-bind:value="name" v-on:input="updateName" />
+  <input type="text" v-model="name" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
+  <ul>
+    <li>{{ user.name }}</li>
+    <li>{{ user.surname }}</li>
+  </ul>
 
-  <main>
-    <TheWelcome />
-  </main>
+  <select v-model="selectedColor">
+    <option v-for="color in colors" :key="color" :value="color">
+      {{ color }}
+    </option>
+  </select>
+  <p>
+    Selected color:
+    <span :style="{ color: selectedColor || 'none' }">{{ selectedColor }}</span>
+  </p>
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>

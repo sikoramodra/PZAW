@@ -1,40 +1,38 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import { reactive } from 'vue';
 
-const name = ref('Wojciech');
-name.value = 'Wojtek';
-
-const user = reactive({
-  name: 'Wojciech',
-  surname: 'Modro',
-});
-user.surname = 'Nowak';
-
-const colors = ['red', 'green', 'blue'];
-const selectedColor = ref();
-
-const updateName = (event) => {
-  name.value = event.target.value;
-};
+const todo = reactive([
+  {
+    text: 'Zrobić matmę',
+    finished: false,
+  },
+  {
+    text: 'Odkurzyć pokój',
+    finished: false,
+  },
+  {
+    text: 'Wynieść śmieci',
+    finished: true,
+  },
+]);
 </script>
 
 <template>
-  <h1>{{ name }}</h1>
-  <input type="text" v-bind:value="name" v-on:input="updateName" />
-  <input type="text" v-model="name" />
-
   <ul>
-    <li>{{ user.name }}</li>
-    <li>{{ user.surname }}</li>
+    <template v-for="(task, index) in todo">
+      <li v-key="index">
+        <p
+          :style="
+            task.finished
+              ? { 'color': 'grey', 'text-decoration': 'line-through' }
+              : ''
+          "
+        >
+          {{ task.text }}
+        </p>
+        <input type="checkbox" v-model="task.finished" />
+      </li>
+    </template>
   </ul>
-
-  <select v-model="selectedColor">
-    <option v-for="color in colors" :key="color" :value="color">
-      {{ color }}
-    </option>
-  </select>
-  <p>
-    Selected color:
-    <span :style="{ color: selectedColor || 'none' }">{{ selectedColor }}</span>
-  </p>
+  <div v-if="todo.every((task) => task.finished)">All tasks are finished!</div>
 </template>

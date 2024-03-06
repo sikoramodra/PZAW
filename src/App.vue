@@ -1,5 +1,6 @@
 <script setup>
 import { reactive } from 'vue';
+import TodoItem from './components/todoItem.vue';
 
 const todo = reactive([
   {
@@ -19,19 +20,11 @@ const todo = reactive([
 
 <template>
   <ul>
-    <template v-for="(task, index) in todo" :key="index">
-      <li :class="{ finished: task.finished }">
-        {{ task.text }}
-        <input type="checkbox" v-model="task.finished" />
-      </li>
+    <template v-for="task in todo">
+      <TodoItem :text="task.text" :finished="task.finished" @changed="(task) => task.finished = !task.finished" />
     </template>
   </ul>
   <div v-if="todo.every((task) => task.finished)">All tasks are finished!</div>
 </template>
 
-<style>
-.finished {
-  color: gray;
-  text-decoration: line-through;
-}
-</style>
+

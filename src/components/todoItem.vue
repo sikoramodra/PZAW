@@ -1,22 +1,30 @@
 <script setup>
-const props = defineProps({
-    text: {type: String, required: true},
-    finished: {type: Boolean, required: false, default: false}
-})
+import { defineProps, defineEmits } from 'vue';
 
-const emit = defineEmits(['changed']);
+const props = defineProps({
+  todoItem: {
+    type: Object,
+    required: true,
+  },
+});
+
+const emit = defineEmits(['updateFinishedStatus']);
+
+const updateFinishedStatus = () => {
+  emit('updateFinishedStatus', {
+    text: props.todoItem.text,
+    finished: !props.todoItem.finished,
+  });
+};
 </script>
 
 <template>
-    <li :class="{ finished: props.finished }">
-        {{ props.text }}
-        <input type="checkbox" v-model="props.finished" @click="emit('changed', props.finished)" />
-    </li>
+  <li>
+    {{ props.todoItem.text }}
+    <input
+      type="checkbox"
+      :checked="props.todoItem.finished"
+      @change="updateFinishedStatus"
+    />
+  </li>
 </template>
-
-<style>
-.finished {
-  color: gray;
-  text-decoration: line-through;
-}
-</style>

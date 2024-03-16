@@ -24,7 +24,7 @@ const todo = reactive([
         finished: false,
       },
       {
-        text: 'Perzeczytać lekturę',
+        text: 'Przeczytać lekturę',
         finished: false,
       },
     ],
@@ -35,16 +35,26 @@ const isActive = ref(false);
 </script>
 
 <template>
-  <h2 class="accordion" :class="{ active: isActive }" @click="isActive = !isActive">Tasks</h2>
-  <div v-for="task in todo" class="panel" v-bind:style="{ display: isActive ? 'block' : 'none' }">
-    <TodoList >{{ task.name }}</TodoList>
+  <h2
+    :class="{ active: isActive }"
+    class="accordion"
+    @click="isActive = !isActive"
+  >
+    Tasks
+  </h2>
+  <div
+    v-for="list in todo"
+    :key="list.name"
+    class="panel"
+    :style="{ display: isActive ? 'block' : 'none' }"
+  >
+    <TodoList :todoList="list" />
   </div>
 </template>
 
 <style>
 .accordion {
   background-color: #eee;
-  color: #444;
   cursor: pointer;
   padding: 18px;
   width: calc(100% - 36px);
@@ -54,26 +64,15 @@ const isActive = ref(false);
   transition: 0.4s;
 }
 
-.active, .accordion:hover {
+.active,
+.accordion:hover {
   background-color: #ccc;
 }
 
 .panel {
   padding: 0 18px;
-  background-color: white;
+  background-color: #fff;
   display: none;
   overflow: hidden;
-}
-
-.accordion:after {
-  content: '\02795';
-  font-size: 13px;
-  color: #777;
-  float: right;
-  margin-left: 5px;
-}
-
-.active:after {
-  content: "\2796";
 }
 </style>

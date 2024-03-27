@@ -1,43 +1,35 @@
 <script setup>
-import { computed, defineProps, ref } from 'vue';
-import TodoItem from './todoItem.vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
-  todoList: {
-    type: Object,
+  tasks: {
+    type: Array,
     required: true,
   },
 });
 
 const isActive = ref(false);
 
-const handleUpdateFinishedStatus = ({ text, finished }) => {
-  const item = props.todoList.tasks.find((item) => item.text === text);
-  if (item) item.finished = finished;
+const allTasksFinished = computed(() => {
+  return props.tasks.every((task) => task.finished);
+});
+const collapse = () => {
+  isActive.value = false;
 };
 
-const allTasksFinished = computed(() => {
-  return props.todoList.tasks.every((task) => task.finished);
-});
+defineExpose({ collapse });
 </script>
 
 <template>
-  <p
+  <h4
     class="accordion"
     :class="{ active: isActive, finished: allTasksFinished }"
     @click="isActive = !isActive"
   >
-    {{ props.todoList.name }}
-  </p>
+    <slot name="header" />
+  </h4>
   <div class="panel" v-bind:style="{ display: isActive ? 'block' : 'none' }">
-    <ul>
-      <TodoItem
-        v-for="item in props.todoList.tasks"
-        :key="item.text"
-        :todoItem="item"
-        @updateFinishedStatus="handleUpdateFinishedStatus"
-      />
-    </ul>
+    <slot name="default" />
   </div>
 </template>
 

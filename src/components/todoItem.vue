@@ -1,30 +1,20 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue';
-
 const props = defineProps({
-  todoItem: {
-    type: Object,
+  modelValue: {
+    type: Boolean,
     required: true,
   },
 });
 
-const emit = defineEmits(['updateFinishedStatus']);
-
-const updateFinishedStatus = () => {
-  emit('updateFinishedStatus', {
-    text: props.todoItem.text,
-    finished: !props.todoItem.finished,
-  });
-};
+const emit = defineEmits(['update:modelValue']);
 </script>
 
 <template>
-  <li>
-    {{ props.todoItem.text }}
-    <input
-      type="checkbox"
-      :checked="props.todoItem.finished"
-      @change="updateFinishedStatus"
-    />
-  </li>
+  <input
+    type="checkbox"
+    :checked="props.modelValue"
+    @change="emit('update:modelValue', $event.target.checked)"
+  />
+  <slot />
+  <br />
 </template>

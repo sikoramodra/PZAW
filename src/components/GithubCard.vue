@@ -1,46 +1,92 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, watch } from 'vue';
 
 const props = defineProps({
-  user: {
+  username: {
     type: String,
-    required: true,
+  },
+  userData: {
+    type: Object,
   },
 });
 
-const person = ref([]);
+const user = ref(props.userData);
 
-async function fetchData() {
+const fetchUserData = async (username) => {
   try {
-    const response = await fetch(`https://api.github.com/users/${props.user}`);
+    const response = await fetch(`https://api.github.com/users/${username}`);
     if (!response.ok) {
-      throw new Error(`Failed to fetch user: ${props.user}`);
+      throw new Error(`Failed to fetch user: ${username}`);
     }
-    person.value = await response.json();
+    return await response.json();
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
   }
-}
+};
 
-onMounted(fetchData);
+watch(
+  () => props.userData,
+  async () => {
+    if (!user.value && props.username) {
+      user.value = await fetchUserData(props.username);
+    }
+  },
+  { immediate: true },
+);
 </script>
 
 <template>
-  <div>
-    <img v-if="!person" :src="person.avatar_url" alt="user's avatar" />
-    <h3>{{ person.login || 'Person Not Found' }}</h3>
+  <a v-if="user" :href="user.html_url" target="_blank">
+    <img :src="user.avatar_url" alt="user's avatar" />
+    <h3>{{ user.login }}</h3>
+    <p v-if="user.name">{{ user.name }}</p>
+    <p v-if="user.bio" class="bio">{{ user.bio }}</p>
+    <p v-if="user.location">Location: {{ user.location }}</p>
+    <p v-if="user.followers">Followers: {{ user.followers }}</p>
+  </a>
+  <div v-else>
+    <p>could not find: {{ props.username }}</p>
   </div>
 </template>
 
 <style scoped>
+* {
+  color: #000;
+  text-decoration: none;
+}
+
+a,
 div {
   padding: 10px;
   border-radius: 5px;
   background-color: #ddd;
+  box-shadow: 2px 2px 3px #444;
+  overflow: hidden;
+  width: 256px;
+  max-height: 600px;
+}
+
+div {
+  display: grid;
+  place-items: center;
+}
+
+p {
+  word-wrap: break-word;
+  color: #444;
+  font-size: 0.8rem;
+}
+
+.bio {
+  font-size: 1rem;
+  margin: 2rem 0;
+  max-height: 150px;
+  overflow: auto;
 }
 
 img {
   border-radius: 5px;
-  width: 128px;
+  box-shadow: 0 0 2px #000;
+  width: 256px;
 }
 </style>

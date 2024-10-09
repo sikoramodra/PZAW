@@ -1,25 +1,24 @@
-import { useRef } from "react";
+import { useRef } from 'react'
 
 function Sci() {
-	const inputRef = useRef()
-	
-	const handleButton = () => {
-		console.log("HI");
-		console.log(inputRef.current.value)
-	}
+  const inputRef = useRef()
 
-	const handleInputText = (e) => {
-		console.log(e.target.value);
-	}
+  const handleButton = () => {
+    console.log('HI')
+    console.log(inputRef.current.value)
+  }
 
-	return (
-		<div>
-			Sci
-			<input type="button" value="asd" onClick={handleButton}></input>
+  const handleInputText = (e) => {
+    console.log(e.target.value)
+  }
 
-			<input ref={inputRef} type="text" onChange={handleInputText}></input>
-		</div>
-	);
+  return (
+    <div>
+      Sci
+      <input type="button" value="asd" onClick={handleButton}></input>
+      <input ref={inputRef} type="text" onChange={handleInputText}></input>
+    </div>
+  )
 }
 
-export default Sci;
+export default Sci

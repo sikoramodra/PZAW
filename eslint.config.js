@@ -7,7 +7,7 @@ import prettier from 'eslint-plugin-prettier';
 import prettierConfig from 'eslint-config-prettier';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import importPlugin from 'eslint-plugin-import';
-import simpleImportSort from 'eslint-plugin-simple-import-sort'
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 export default [
   importPlugin.flatConfigs.recommended,
@@ -30,7 +30,7 @@ export default [
       'react-refresh': reactRefresh,
       'simple-import-sort': simpleImportSort,
       'jsx-a11l': jsxA11y,
-      'prettier': prettier,
+      prettier,
     },
     rules: {
       ...js.configs.recommended.rules,

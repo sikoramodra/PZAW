@@ -1,27 +1,4 @@
-#myForm {
-  width: 40vw;
-  height: 20vh;
-}
-
-#formArea {
-  display: flex;
-  justify-content: space-around;
-}
-
-#controlArea {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: space-around;
-}
-
-#lhs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
-
-#rhs {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+#grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
 }

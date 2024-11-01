@@ -1,19 +1,15 @@
 {
   "name": "backend",
+  "private": true,
   "version": "0.0.0",
-  "description": "",
-  "main": "server.js",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "lint": "eslint --fix './**/*.{js,cjs,mjs}'",
     "format": "prettier --write './**/*.{js,cjs,mjs,md,json}'",
-    "prepare": "husky",
     "lint-staged": "lint-staged"
   },
-  "keywords": [],
-  "author": "",
-  "license": "",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -27,7 +23,6 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^15.11.0",
-    "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3"

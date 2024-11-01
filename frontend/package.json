@@ -1,5 +1,5 @@
 {
-  "name": "pzaw",
+  "name": "frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,6 @@
     "preview": "vite preview",
     "lint": "eslint --fix './**/*.{js,cjs,mjs,jsx}'",
     "format": "prettier --write './**/*.{js,cjs,mjs,jsx,css,md,json}'",
-    "prepare": "husky",
     "lint-staged": "lint-staged"
   },
   "dependencies": {
@@ -32,7 +31,6 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^15.9.0",
-    "husky": "^9.1.6",
     "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "vite": "^5.4.8"

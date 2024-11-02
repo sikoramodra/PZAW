@@ -5,7 +5,7 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon -q server.js",
     "lint": "eslint --fix './**/*.{js,cjs,mjs}'",
     "format": "prettier --write './**/*.{js,cjs,mjs,md,json}'",
     "lint-staged": "lint-staged"
@@ -26,6 +26,5 @@
     "lint-staged": "^15.2.10",
     "nodemon": "^3.1.7",
     "prettier": "^3.3.3"
-  },
-  "packageManager": "pnpm@9.12.0"
+  }
 }

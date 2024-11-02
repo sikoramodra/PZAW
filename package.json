@@ -4,9 +4,13 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "dev": "concurrently --names backend,frontend -c red,blue \"pnpm -C backend run start\" \"pnpm -C frontend run dev\"",
+    "format": "pnpm -C backend run format && pnpm -C backend run format",
+    "lint": "pnpm -C backend run lint && pnpm -C backend run lint"
   },
   "devDependencies": {
+    "concurrently": "^9.0.1",
     "husky": "^9.1.6"
   }
 }

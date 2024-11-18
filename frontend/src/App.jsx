@@ -1,8 +1,10 @@
 import './App.css';
 import AxiosExampe from './components/AxiosExample.jsx';
 import Task1 from './components/Task1/Task1.jsx';
+import Task02 from './components/Task02/Task02.jsx';
 import json from './posts.json';
 import { useState } from 'react';
+import 'bootstrap';
 
 const randomImg = () => {
   let num = String(Math.floor(Math.random() * 40) + 1).padStart(2, '0');
@@ -14,7 +16,7 @@ function App() {
 
   return (
     <div>
-      <AxiosExampe />
+      <Task02 />
     </div>
   );
   //return (

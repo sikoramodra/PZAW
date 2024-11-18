@@ -25,13 +25,11 @@ function MyComponent() {
     });
   };
 
-  const handleClick = (e) => setColor(e.target.value);
-
   return (
     <div>
-      <form id="myForm">
-        <div id="formArea">
-          <div id="lhs">
+      <form onSubmit={onSubmit}>
+        <div>
+          <div>
             <input type="text" ref={text1} />
             <input type="text" ref={text2} />
 
@@ -41,22 +39,22 @@ function MyComponent() {
               ))}
             </select>
           </div>
-          <div id="rhs">
+          <div>
             {['red', 'blue', 'green', 'pink'].map((color) => (
               <label key={color}>
                 <input
                   type="radio"
                   name="color"
                   value={color}
-                  onChange={handleClick}
+                  onChange={(e) => setColor(e.target.value)}
                 />
                 {color}
               </label>
             ))}
           </div>
         </div>
-        <div id="controlArea">
-          <input type="submit" value="Submit" onClick={onSubmit} />
+        <div>
+          <input type="submit" value="Submit" />
           <input type="reset" value="Clear" />
         </div>
       </form>

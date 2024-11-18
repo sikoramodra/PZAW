@@ -6,8 +6,8 @@
   "scripts": {
     "prepare": "husky",
     "dev": "concurrently --names backend,frontend -c red,blue \"pnpm -C backend run dev\" \"pnpm -C frontend run dev\"",
-    "format": "pnpm -C backend run format && pnpm -C backend run format",
-    "lint": "pnpm -C backend run lint && pnpm -C backend run lint"
+    "format": "pnpm -C backend run format && pnpm -C frontend run format",
+    "lint": "pnpm -C backend run lint && pnpm -C frontend run lint"
   },
   "devDependencies": {
     "concurrently": "^9.0.1",

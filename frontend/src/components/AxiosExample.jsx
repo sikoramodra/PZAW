@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-function AxiosExampe() {
+function AxiosExample() {
   const [data, setData] = useState([]);
 
   const handelBtn = async () => {
@@ -27,4 +27,4 @@ function AxiosExampe() {
   );
 }
 
-export default AxiosExampe;
+export default AxiosExample;

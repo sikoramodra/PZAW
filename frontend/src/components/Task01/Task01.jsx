@@ -1,9 +1,9 @@
-import './Task1.css';
+import './Task01.css';
 
 const truncateString = (string = '', maxLength = 50) =>
   string.length > maxLength ? `${string.substring(0, maxLength)}…` : string;
 
-function Task1(props) {
+function Task01(props) {
   return (
     <div className="box">
       <h3>{props.title}</h3>
@@ -13,4 +13,4 @@ function Task1(props) {
   );
 }
 
-export default Task1;
+export default Task01;

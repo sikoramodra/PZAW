@@ -16,12 +16,15 @@ function PokemonCard({ pokemon, onCardClick }) {
   });
 
   return (
-    <div onClick={() => onCardClick(pokemon.base)}>
+    <div
+      className="m-2 p-3 border border-secondary rounded text-center"
+      onClick={() => onCardClick(pokemon.base)}
+    >
       <Suspense fallback={<p>Loading...</p>}>
         {img && <LazyImage src={img} alt={pokemon.name.english} />}
       </Suspense>
-      <p>{pokemon.name.english}</p>
-      <p>{pokemon.type.join(', ')}</p>
+      <p className="font-weight-bold">{pokemon.name.english}</p>
+      <p className="text-muted">{pokemon.type.join(', ')}</p>
     </div>
   );
 }

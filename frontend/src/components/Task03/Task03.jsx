@@ -66,21 +66,24 @@ function Task03() {
   };
 
   return (
-    <div>
-      <SearchInput onSearchChange={setQ} />
+    <div className="container-fluid p-3">
+      <SearchInput setQ={setQ} />
       <TypeFilter
         types={types}
         selectedTypes={selectedTypes}
         onTypeChange={onTypeChange}
       />
-      <PokemonStats stats={selectedStats} />
+      <PokemonStats
+        stats={selectedStats}
+        onClose={() => setSelectedStats(null)}
+      />
       <InfiniteScroll
         dataLength={pokemons.length}
         next={() => fetchPokemons()}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
       >
-        <div>
+        <div className="container-fluid d-flex flex-wrap justify-content-center">
           {pokemons.map((pokemon, index) => (
             <PokemonCard
               key={index}

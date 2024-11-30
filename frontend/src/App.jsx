@@ -1,8 +1,8 @@
 import './App.css';
-import Task02 from './components/Task02/Task02.jsx';
+import Task03 from './components/Task03/Task03.jsx';
 
 function App() {
-  return <Task02 />;
+  return <Task03 />;
 }
 
 export default App;

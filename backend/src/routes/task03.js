@@ -54,8 +54,8 @@ router.get('', (req, res) => {
     return matchesName && matchesTypes;
   });
 
-  const startIndex = (page - 1) * limit;
-  const paginated = filtered.slice(startIndex, startIndex + limit);
+  const startIndex = (Number(page) - 1) * Number(limit);
+  const paginated = filtered.slice(startIndex, startIndex + Number(limit));
 
   res.status(200).json({
     data: paginated,

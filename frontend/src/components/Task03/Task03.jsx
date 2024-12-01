@@ -4,7 +4,6 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 
 import PokemonCard from './PokemonCard.jsx';
 import PokemonStats from './PokemonStats.jsx';
-import SearchInput from './SearchInput.jsx';
 import TypeFilter from './TypeFilter.jsx';
 
 function Task03() {
@@ -67,7 +66,11 @@ function Task03() {
 
   return (
     <div className="container-fluid p-3">
-      <SearchInput setQ={setQ} />
+      <input
+        className="form-control"
+        type="text"
+        onChange={(e) => setQ(e.target.value)}
+      />
       <TypeFilter
         types={types}
         selectedTypes={selectedTypes}
@@ -79,19 +82,18 @@ function Task03() {
       />
       <InfiniteScroll
         dataLength={pokemons.length}
-        next={() => fetchPokemons()}
+        next={fetchPokemons}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
+        className="container-fluid d-flex flex-wrap justify-content-center"
       >
-        <div className="container-fluid d-flex flex-wrap justify-content-center">
-          {pokemons.map((pokemon, index) => (
-            <PokemonCard
-              key={index}
-              pokemon={pokemon}
-              onCardClick={setSelectedStats}
-            />
-          ))}
-        </div>
+        {pokemons.map((pokemon) => (
+          <PokemonCard
+            key={pokemon.id}
+            pokemon={pokemon}
+            onCardClick={setSelectedStats}
+          />
+        ))}
       </InfiniteScroll>
     </div>
   );

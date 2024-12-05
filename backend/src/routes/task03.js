@@ -42,14 +42,14 @@ router.get('/image/:id', (req, res) => {
 
 router.get('', (req, res) => {
   const { q, types, page = 1, limit = 20 } = req.query;
-  const parsedTypes = types?.split(',') || [];
 
   const filtered = pokedex.filter((pokemon) => {
-    const matchesName = q ? pokemon.name.english.includes(q) : true;
-    // const matchesTypes = parsedTypes ? parsedTypes.every(type => pokemon.type.includes(type)) : true;
-    const matchesTypes = parsedTypes
-      ? parsedTypes.some((type) => pokemon.type.includes(type))
+    const matchesName = q
+      ? pokemon.name.english.toLowerCase().includes(q.toLowerCase())
       : true;
+    const matchesTypes = types
+      ? types.some((type) => pokemon.type.includes(type))
+      : false;
 
     return matchesName && matchesTypes;
   });

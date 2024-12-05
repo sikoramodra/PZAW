@@ -20,7 +20,7 @@ function Task03() {
       .get('http://localhost:3000/task03/pokemon', {
         params: {
           q: q,
-          types: selectedTypes.join(','),
+          types: selectedTypes,
           page: reset ? 1 : page,
           limit: 20,
         },

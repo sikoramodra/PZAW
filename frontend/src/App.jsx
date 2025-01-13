@@ -1,13 +1,8 @@
 import './App.css';
-import { useEffect } from 'react';
-import Task03 from './components/Task03/Task03.jsx';
+import Task04 from './components/Task04/Task04.jsx';
 
 function App() {
-  useEffect(() => {
-    window.history.scrollRestoration = 'manual';
-  }, []);
-
-  return <Task03 />;
+  return <Task04 />;
 }
 
 export default App;

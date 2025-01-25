@@ -4,13 +4,12 @@ import Gallery from './Gallery.jsx';
 
 function Task04() {
   const queryClient = new QueryClient();
-
   return (
     <div>
       <QueryClientProvider client={queryClient}>
         <Form />
+        <Gallery />
       </QueryClientProvider>
-      <Gallery />
     </div>
   );
 }

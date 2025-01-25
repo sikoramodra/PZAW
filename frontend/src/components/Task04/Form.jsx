@@ -1,15 +1,8 @@
 import { useForm } from '@tanstack/react-form';
-import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import InputField from './InputField.jsx';
 
 function Form() {
-  const mutation = useMutation({
-    mutationFn: (formData) => {
-      return axios.post('http://localhost:3000/task04/register', formData);
-    },
-  });
-
   const form = useForm({
     defaultValues: {
       email: '',
@@ -20,7 +13,10 @@ function Form() {
     },
     onSubmit: async ({ value }) => {
       try {
-        const response = await mutation.mutateAsync(value);
+        const response = await axios.post(
+          'http://localhost:3000/task04/register',
+          value,
+        );
         console.log('Form submitted successfully:', response.data);
       } catch (error) {
         console.error('Err:', error.response?.data?.message || error.message);

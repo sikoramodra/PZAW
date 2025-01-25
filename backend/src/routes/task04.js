@@ -42,8 +42,17 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get('/image/{id}', (req, res) => {
-  res.sendStatus(200);
+router.get('/image/:id', (req, res) => {
+  setTimeout(() => {
+    try {
+      const img = readFileSync(
+        `src/images/${req.params.id.padStart(3, '0')}.png`,
+      );
+      res.status(200).send(img.toString('base64'));
+    } catch {
+      res.status(404).send('Image not found');
+    }
+  }, 500);
 });
 
 export default router;
